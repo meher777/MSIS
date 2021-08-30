@@ -1,5 +1,10 @@
 # MSIS
+<<<<<<< Updated upstream
  dev-meher
+=======
+<<<<<<< HEAD
+
+>>>>>>> Stashed changes
 
 meher 
 =======
