@@ -1,0 +1,104 @@
+<!doctype html>
+    <html>
+    <head>
+        <title>Indiana Soccer Referees Association</title>
+        <link rel="stylesheet" href="css/home.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+        <script src="https://unpkg.com/vue@next"></script> 
+    </head>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+        <a class="navbar-brand" href="#">U.S.S.F</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="home.html">Home Page</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="games.html">Games List</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="assignments.html">Sign Up</a>
+            </li>
+            </ul>
+            <form class="d-flex">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
+        </div>
+    </nav>
+
+
+    <body>
+        <div id="results" class="container">
+            <div class="row align-items-start">
+                <div class="col col-4">
+                <!-- <p>Profile information for {{ person.name.first }}</p> -->
+                <div v-for="r in refs" v-on:click="selectref(r)"
+                    :class="['ref', {selected: selectedref && r.id == selectedref.id}]">
+                    <span class="userName">{{ r.username }}</span><br>
+                    <span class="refName">{{ r.name }}</span>
+                </div>
+                </div>
+
+                <div  class="col col-8" v-if="selectedref">
+                <h1>Game Assignment(s) for {{ selectedref.name }}</h1>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Company</th>
+                            <th>Salary</th>
+                            <th>Bonus</th>
+                            <th>Offer Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="game in games">
+                            <td>{{ offer.companyName }}</td>
+                            <td>{{ prettyDollar(offer.salary) }}</td>
+                            <td>{{ prettyDollar(offer.bonus) }}</td>
+                            <td>{{ offer.offerDate }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <form v-on:submit.prevent="postNewGame">
+                    <div class="mb-3">
+                        <label for="companyName" class="form-label">Company Name</label>
+                        <input type="text" v-model="offerForm.companyName"
+                        class="form-control" id="companyName">
+                    </div>
+                    <div class="mb-3">
+                        <label for="salary" class="form-label">Salary</label>
+                        <input type="number" v-model="offerForm.salary" class="form-control" id="salary">
+                    </div>
+                    <div class="mb-3">
+                        <label for="bonus" class="form-label">Bonus</label>
+                        <input type="number" v-model="offerForm.bonus" class="form-control" id="bonus">
+                    </div>
+                    <div class="mb-3">
+                        <label for="offerDate" class="form-label">offerDate</label>
+                        <input type="date" v-model="offerForm.offerDate" class="form-control" id="offerDate">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+                <div class="noGames" v-if="! games.length">
+                    <h3>No Game Assignments.</h3>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bootstrap Bundle with Popper -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+        <script src="js/index.js"></script>
+    </body>
+</html>
+
+    
