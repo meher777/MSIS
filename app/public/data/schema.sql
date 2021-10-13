@@ -1,36 +1,49 @@
-CREATE DATABASE IF NOT EXISTS msisdb2;
-USE msisdb2;
+create database soccer;
+use soccer;
 
-DROP TABLE IF EXISTS Referee;
-DROP TABLE IF EXISTS Game;
+create table users( 
+user_id int,
+name varchar(20),
+role varchar(20),
+primary key (user_id)) ;
 
-CREATE Table Game (
-gameID INT NOT NULL,
-field VARCHAR(255),
-time VARCHAR(255),
-CONSTRAINT PK_Referee PRIMARY KEY (gameID)
-); 
 
-Create Table Referee (
-refID INT NOT NULL,
-assignmentID INT NOT NULL,
-gameID INT NOT NULL,
-name VARCHAR(255),
-age INT,
-role VARCHAR(255),
-grade VARCHAR(255),
-rating INT,
-status VARCHAR(50),
-CONSTRAINT PK_Referee PRIMARY KEY (refID),
-CONSTRAINT FK_RefereeGame FOREIGN KEY (gameID) references Game(gameID)
+insert into users values (1, "Kesner" , "assignor");
+insert into users values (2, "Bipin Prabhakar" , "refree");
+insert into users values (3, "Tom Gregory" , "refree");
+insert into users values (4, "Alex" , "refree");
+
+insert into users values (5, "Beth", "refree");
+
+create table refree(
+refree_id int,
+assignee_id int,
+grade varchar(5),
+status varchar(30),
+rating int,
+auto_id int auto_increment ,
+match_id int,
+foreign key (match_id) references game(match_id),
+foreign key(refree_id) references users(user_id),
+foreign key(assignee_id) references users(user_id),
+primary key (auto_id)
+
 );
 
-INSERT INTO Game (gameID, field, time) 
-VALUES (1, "Woodlawn", "10:00");
-INSERT INTO Referee (refID, assignmentID, gameID, name, age, role, grade, rating, status) 
-VALUES (1, 1, 1, "Jim Turner", 24, "Assignor", "good", 10, "active");
+insert into refree(refree_id,assignee_id,grade,status,rating,match_id) values (2,1, "II", "unassigned", 90,1);
+insert into refree(refree_id,assignee_id,grade,status,rating,match_id) values (2,3, "I", "unassigned", 99,4);
+insert into refree(refree_id,assignee_id,grade,status,rating,match_id) values (2,4, "II", "assigned", 95,3);
+insert into refree(refree_id,assignee_id,grade,status,rating,match_id) values (2,5, "II", "assigned", 97,3);
+
+create table game(
+	field varchar(20),
+    game_time varchar(40),
+    match_id int,
+    primary key(match_id)
+);
 
 
-
--- SELECT * FROM Referee;
--- SELECT * FROM Game;
+insert into game values("IU stadium" ,"2021/12/10" , 1);
+insert into game values("IU stadium" ,"2021/11/10" , 2);
+insert into game values("IU stadium" ,"2021/10/10" , 3);
+insert into game values("IU stadium" ,"2021/19/10" , 4);
