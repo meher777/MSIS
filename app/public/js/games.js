@@ -2,7 +2,6 @@ const app = {
     data() {
       return {
         games:[],
-        selectedRef: [],
         refs:[],
         gameForm:{}
       }
@@ -24,8 +23,8 @@ const app = {
                 console.error(error);
             });
         },
-        postNewOffer(evt) {
-          this.gameForm.refId = this.selectedRef.id;        
+        postNewGame(evt) {
+          this.gameForm.gameID = this.selectedGame.id;        
           console.log("Posting:", this.gameForm);
           // alert("Posting!");
   
@@ -50,7 +49,6 @@ const app = {
     created() {
         this.fetchGameData();
     }
-  
   }
   
   Vue.createApp(app).mount('#results');
