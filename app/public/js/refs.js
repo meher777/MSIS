@@ -8,7 +8,7 @@ const app = {
     },
     computed: {},
     methods: {
-        fetchGameData(r) {
+        fetchRefData(r) {
             console.log("Fetching game data for ", r);
             fetch('/api/game/?ref=' + r.id)
             .then( response => response.json() )
@@ -23,12 +23,12 @@ const app = {
                 console.error(error);
             });
         },
-        postNewGame(evt) {
+        postNewAssignment(evt) {
           this.gameForm.gameID = this.selectedGame.id;        
           console.log("Posting:", this.gameForm);
           // alert("Posting!");
   
-          fetch('api/game/create.php', {
+          fetch('api/referee/create.php', {
               method:'POST',
               body: JSON.stringify(this.gameForm),
               headers: {
@@ -47,7 +47,7 @@ const app = {
         }
     },
     created() {
-        this.fetchGameData();
+        this.fetchRefData();
     }
   }
   
