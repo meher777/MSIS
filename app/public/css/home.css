@@ -1,0 +1,46 @@
+.navbar {
+    margin-bottom: 0;
+    border-radius: 0;
+    }
+    footer {
+    background-color: #e4e4e4;
+    padding: 25px;
+    }
+body {
+    padding-top: 5px;
+    padding-right: 30px;
+    padding-bottom: 50px;
+    padding-left: 30px;
+    background-color: beige;
+    text-decoration-color: blue;
+    
+  }
+h1{
+    color:blueviolet;
+}
+h2{
+  color:chartreuse;
+}
+a{
+  color:darkgoldenrod;
+}
+
+.game {
+  margin: 10px 2px;
+  padding: 4px;
+  border: 1px solid gray;
+  background-color: antiquewhite;
+}
+
+.selected {
+  background-color: burlywood;
+}
+
+.userName {
+  font-weight:bold;
+}
+
+.studentName{
+  color:#999;
+}
+
