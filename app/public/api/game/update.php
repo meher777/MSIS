@@ -31,10 +31,15 @@ $db = DbConnection::getConnection();
 // Step 2: Create & run the query
 // Note the use of parameterized statements to avoid injection
 $stmt = $db->prepare(
-  'DELETE FROM game WHERE match_id = ?'
+  'UPDATE game SET 
+    field = ?,
+    game_time = ?
+  WHERE match_id = ?'
 );
 
 $stmt->execute([
+  $_POST['field'],
+  $_POST['game_time'],
   $_POST['match_id']
 ]);
 
