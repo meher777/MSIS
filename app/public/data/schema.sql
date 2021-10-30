@@ -27,7 +27,6 @@ foreign key (match_id) references game(match_id),
 foreign key(refree_id) references users(user_id),
 foreign key(assignee_id) references users(user_id),
 primary key (auto_id)
-
 );
 
 insert into refree(refree_id,assignee_id,grade,status,rating,match_id) values (2,1, "II", "unassigned", 90,1);

@@ -1,0 +1,122 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Charlotte Bagels Website</title>
+    <link rel="stylesheet" href="css/Index.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <script src="https://unpkg.com/vue@next"></script> 
+  </head>
+
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">RandomWebsite</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="index.html">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="AboutMe.html">About Me</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="Reading.html">Book Collection</a>
+          </li>
+        </ul>
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+
+
+  <body>
+    <h1>Welcome To My Page</h1>
+    <div id="results" class="container">
+      <div class="row align-items-start">
+        <div class="col col-4">
+          <!-- <p>Profile information for {{ person.name.first }}</p> -->
+          <div v-for="s in students" v-on:click="selectStudent(s)"
+            :class="['student', {selected: selectedStudent && s.id == selectedStudent.id}]">
+            <span class="userName">{{ s.username }}</span><br>
+            <span class="studentName">{{ s.name }}</span>
+          </div>
+        </div>
+
+        <div  class="col col-8" v-if="selectedStudent">
+          <h1>Offers for {{ selectedStudent.name }}</h1>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Company</th>
+                <th>Salary</th>
+                <th>Bonus</th>
+                <th>Offer Date</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+              <tbody>
+                  <tr v-for="offer in offers">
+                      <td>{{ offer.companyName }}</td>
+                      <td>{{ prettyDollar(offer.salary) }}</td>
+                      <td>{{ prettyDollar(offer.bonus) }}</td>
+                      <td>{{ offer.offerDate }}</td>
+                      <td></td>
+                      <td>
+                        <button type="button" v-on:click="handleEditOffer(offer)" class="btn btn-outline-secondary btn-sm">Edit</button>
+                        <button type="button" v-on:click="postDeleteOffer(offer)" class="btn btn-outline-secondary btn-sm">Delete</button>
+
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
+
+          <h3>{{ selectedOffer === null ? "Add " : "Edit " }} Offer</h3>
+          <form v-on:submit.prevent="postOffer">
+            <div class="mb-3">
+              <label for="companyName" class="form-label">Company Name</label>
+              <input type="text" v-model="offerForm.companyName"
+               class="form-control" id="companyName">
+            </div>
+            <div class="mb-3">
+              <label for="salary" class="form-label">Salary</label>
+              <input type="number" v-model="offerForm.salary" class="form-control" id="salary">
+            </div>
+            <div class="mb-3">
+              <label for="bonus" class="form-label">Bonus</label>
+              <input type="number" v-model="offerForm.bonus" class="form-control" id="bonus">
+            </div>
+            <div class="mb-3">
+              <label for="offerDate" class="form-label">offerDate</label>
+              <input type="date" v-model="offerForm.offerDate" class="form-control" id="offerDate">
+            </div>
+            <button type="submit" class="btn btn-primary">{{ selectedOffer === null ? "Add " : "Edit " }} Offer</button>
+            <button type="button" class="btn btn-outline-secondary" 
+               v-if="selectedOffer"
+               v-on:click="handleResetEdit">Cancel Edit</button>
+          </form>
+          <div class="noOffers" v-if="! offers.length">
+            <h3>No offers.</h3>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
+    
+    <script src="js/index.js"></script>
+  </body>
+
+  
+</html>
+
+<!-- References -->
+    <!-- https://www.w3docs.com/snippets/html/how-to-create-mailto-links.html Mailto code-->
+    <!-- https://www.storyblocks.com/video/stock/happy-business-woman-satisfied-after-checking-report-on-computer-successful-business-woman-smiling-in-home-office-business-success-concept-close-up-of-woman-face-looking-monitor-hilybdbvxjlc9r809 Random photo -->
+    <!-- https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css Bootstrap Navbar -->
