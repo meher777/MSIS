@@ -26,14 +26,16 @@ $db = DbConnection::getConnection();
 // Step 2: Create & run the query
 // Note the use of parameterized statements to avoid injection
 $stmt = $db->prepare(
-  'INSERT INTO game (field, game_time, match_id)
+  'INSERT INTO game(game_field,game_date, start_time, end_time)
   VALUES (?, ?, ?)'
 );
 
 $stmt->execute([
-  $_POST['field'],
-  $_POST['game_time'],
-  $_POST['match_id']
+  $_POST['game_id'],
+  $_POST['game_field'],
+  $_POST['game_date'],
+  $_POST['start_time'],
+  $_POST['end_time']
 ]);
 
 // Get auto-generated PK from DB
@@ -44,5 +46,5 @@ $stmt->execute([
 // Here, instead of giving output, I'm redirecting to the SELECT API,
 // just in case the data changed by entering it
 header('HTTP/1.1 303 See Other');
-header('Location: ../game/' . $_POST['match_id']);
+header('Location: ../game/' . $_POST['game_id']);
 // dependent on the index.php if(isset(GET)) and select statement

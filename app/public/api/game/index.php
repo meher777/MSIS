@@ -10,7 +10,7 @@ $vars = [];
 
 // or is this if(isset($_GET['referee']))????
 if (isset($_GET['game'])) {
-  $sql = 'SELECT * FROM game WHERE match_id = ?';
+  $sql = 'SELECT * FROM game WHERE game_id = ?';
 
   $vars = [ $_GET['game'] ];
 }

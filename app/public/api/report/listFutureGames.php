@@ -1,10 +1,5 @@
 <?php
 
-// if (($_SERVER['REQUEST_METHOD'] ?? '') != 'POST') {
-//     header($_SERVER["SERVER_PROTOCOL"] . " 405 Method Not Allowed");
-//     exit;
-// }
-
 try {
     $_POST = json_decode(
                 file_get_contents('php://input'), 
@@ -14,8 +9,6 @@ try {
             );
 } catch (Exception $e) {
     header($_SERVER["SERVER_PROTOCOL"] . " 400 Bad Request");
-    // print_r($_POST);
-    // echo file_get_contents('php://input');
     exit;
 }
 
@@ -31,12 +24,24 @@ $db = DbConnection::getConnection();
 // Step 2: Create & run the query
 // Note the use of parameterized statements to avoid injection
 $stmt = $db->prepare(
-  'DELETE FROM referee WHERE referee_id = ?'
-);
+        'SELECT a.referee_status, 
+                g.game_field,
+                g.game_date, 
+                g.start_time, 
+                g.end_time, 
+                r.referee_name 
+                FROM game g, referee r, assignment a 
+                WHERE r.referee_id = a.referee_id AND 
+                      g.game_id = a.game_id AND 
+                      g.game_date > ? and a.referee_status = 'unassigned''       
+
+    );
 
 $stmt->execute([
-  $_POST['referee_id']
-]);
+  $_POST['game_date'],
+  
+ ]);
+
 
 // Get auto-generated PK from DB
 // https://www.php.net/manual/en/pdo.lastinsertid.php
@@ -46,5 +51,4 @@ $stmt->execute([
 // Here, instead of giving output, I'm redirecting to the SELECT API,
 // just in case the data changed by entering it
 header('HTTP/1.1 303 See Other');
-header('Location: ../referee/?referee=' . $_POST['referee_id']);
-// dependent on the index.php if(isset(GET)) and select statement
+header('Location: ../books/');
