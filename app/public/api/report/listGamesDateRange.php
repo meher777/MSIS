@@ -32,13 +32,14 @@ $stmt = $db->prepare(
                 FROM game g, referee r, assignment a 
                 WHERE r.referee_id = a.referee_id AND 
                       g.game_id = a.game_id AND 
-                      g.game_date > ? and g.game_date < ? '
+                      g.game_date > ? and g.game_date < ?  and r.referee_id = ?'
 
     );
 
 $stmt->execute([
   $_POST['game_date'],
   $_POST['game_date'],
+  $_POST['referee_id']
  ]);
 
 

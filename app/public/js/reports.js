@@ -59,9 +59,7 @@ const reportsApp = {
           },
 
     },
-    created() {
-        this.fetchRefereeData();
-    }
+   
   
   }
   
