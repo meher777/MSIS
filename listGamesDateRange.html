@@ -38,62 +38,64 @@
 
 
   <body>
-    <h1>Indiana Soccer Referee Association</h1>
+    <h1>Indiana Soccer Referees Association Reports</h1>
     <div id="" class="container">
       <div class="row align-items-start">
+        <div class="col col-4">
+          <!-- <p>Profile information for {{ person.name.first }}</p> -->
+          <div v-for="s in students" v-on:click="selectStudent(s)"
+            :class="['student', {selected: selectedStudent && s.id == selectedStudent.id}]">
+            <span class="userName">{{ s.username }}</span><br>
+            <span class="studentName">{{ s.name }}</span>
+          </div>
+        </div>
 
-        <div  class="col col-8" v-if="selectedReferee">
-          <h1>Referees</h1>
+        <div  class="col col-8" >
+          <h1>Games by Referee</h1>
+          
+          <form id="refereeTable">
+                <label for="referees">Choose a referee:</label>
+
+                <select v-for = "r in referees">
+                    
+                  <option>{{r.referee_name}}</option>
+                    
+                </select>
+              
+            <label for="startDate">Start Date:</label>
+            <input type="date" id="startDate" name="startDate" v-model="refereeForm">
+
+            <label for="endDate">End Date:</label>
+            <input type="date" id="endDate" name="endDate" v-model="refereeForm">
+
+              
+            <button type = "button" >
+            </button>        
+          </form>
+          
+          
           <table class="table">
             <thead>
               <tr>
-                <th>Name</th>
-                <th>Age</th>
-                <th>Grade</th>
-                <th>Private Rating</th>
+                <th>Game Field</th>
+                <th>Game Date</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+                
 
               </tr>
             </thead>
               <tbody>
-                  <tr v-for="referee in referees">
-                      <td>{{ referee.name }}</td>
-                      <td>{{ referee.age) }}</td>
-                      <td>{{ referee.grade) }}</td>
-                      <td>{{ referee.rating }}</td>
+                  <tr v-for="offer in offers">
+                      <td>{{ offer.companyName }}</td>
+                      <td>{{ prettyDollar(offer.salary) }}</td>
+                      <td>{{ prettyDollar(offer.bonus) }}</td>
+                      <td>{{ offer.offerDate }}</td>
                       <td></td>
-                      <td>
-                        <button type="button" v-on:click="handleEditReferee(referee)" class="btn btn-outline-secondary btn-sm">Edit</button>
-                        <button type="button" v-on:click="postDeleteReferee(referee)" class="btn btn-outline-secondary btn-sm">Delete</button>
-
-                      </td>
+                    
                   </tr>
               </tbody>
           </table>
-
-          <h3>{{ selectedReferee === null ? "Add " : "Edit " }} Referee</h3>
-          <form v-on:submit.prevent="postOffer">
-            <div class="mb-3">
-              <label for="name" class="form-label">Name</label>
-              <input type="text" v-model="refereeForm.name"
-               class="form-control" id="name" disabled> 
-            </div>
-            <div class="mb-3">
-              <label for="age" class="form-label">Age</label>
-              <input type="number" v-model="refereeForm.age" class="form-control" id="age" disabled>
-            </div>
-            <div class="mb-3">
-              <label for="grade" class="form-label">Grade</label>
-              <input type="text" v-model="refereeForm.grade" class="form-control" id="grade">
-            </div>
-            <div class="mb-3">
-              <label for="rating" class="form-label">Private Rating</label>
-              <input type="number" v-model="refereeForm.rating" class="form-control" id="rating">
-            </div>
-            <button type="submit" class="btn btn-primary">{{ selectedReferee === null ? "Add " : "Edit " }} Referee</button>
-            <button type="button" class="btn btn-outline-secondary" 
-               v-if="selectedReferee"
-               v-on:click="handleResetEdit">Cancel Edit</button>
-          </form>
         </div>
       </div>
     </div>
@@ -111,4 +113,4 @@
 <!-- References -->
     <!-- https://www.w3docs.com/snippets/html/how-to-create-mailto-links.html Mailto code-->
     <!-- https://www.storyblocks.com/video/stock/happy-business-woman-satisfied-after-checking-report-on-computer-successful-business-woman-smiling-in-home-office-business-success-concept-close-up-of-woman-face-looking-monitor-hilybdbvxjlc9r809 Random photo -->
-    <!-- https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css Bootstrap Navbar -->
+    <!-- https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css Bootstrap Navbar -
