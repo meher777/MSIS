@@ -12,10 +12,7 @@ const reportsApp = {
     computed: {},
     methods: {
         listFutureGames(evt){
-            //const current = new Date();
-            //console.log(current);
-            // alert("Posting!");
-            alert(this.gamesForm.game_date)
+
             fetch('api/report/listFutureGames.php', {
                 method:'POST',
                 body: JSON.stringify(this.gamesForm),

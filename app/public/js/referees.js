@@ -8,7 +8,7 @@ const RefereeApp = {
   },
   computed: {},
   methods: {
-      fetchRefereeData(r) {
+      fetchRefereeData() {
         fetch('/api/referee/index.php')
         .then( response => response.json() )
           .then( (responseJson) => {
@@ -57,8 +57,7 @@ const RefereeApp = {
         }
       },
       postEditReferee(evt){
-        this.refereeForm.id = this.selectedReferee.id;
-        this.refereeForm.id = this.selectedReferee.id;        
+        this.refereeForm.id = this.selectedReferee.id;              
         console.log("Editing:", this.refereeForm);
         // alert("Posting!");
 
@@ -76,13 +75,14 @@ const RefereeApp = {
             this.referees = json;
             
             // reset the form
+            this.handleResetEdit();
             this.handleResetEdit = {};
           })
           .catch( err => {
             alert("Something went wrong.");
           });
       },
-      postDeleteReferee(o) {  
+     /* postDeleteReferee(o) {  
         if ( !confirm("Are you sure you want to delete the Referee?") ) {
             return;
         }  
@@ -105,7 +105,7 @@ const RefereeApp = {
             // reset the form
             this.handleResetEdit();
           });
-      },
+      },*/
       handleEditReferee(referee) {
         this.selectedReferee = referee;
         this.refereeForm = Object.assign({}, this.selectedReferee);
@@ -121,6 +121,6 @@ const RefereeApp = {
 
 }
 
-Vue.createApp(refereeApp).mount('#refereeTable');
+Vue.createApp(RefereeApp).mount('#refereeTable');
 
 // Resources : https://stackoverflow.com/questions/62975890/how-to-reload-refresh-a-webpage-in-vue-js-after-a-certain-event-or-a-button-is-c
