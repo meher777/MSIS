@@ -1,22 +1,24 @@
 const reportsApp = {
     data() {
       return {
-        referees: [],
-        reportsRefereeForm: {},
-        
+        games: [],
+        referees : [],
+        gamesForm: {},
+        gameReportsForm : {},
+            
       
       }
     },
     computed: {},
     methods: {
-        listFutureGames(){
-            const current = new Date();
-            
+        listFutureGames(evt){
+            //const current = new Date();
+            //console.log(current);
             // alert("Posting!");
-    
+            alert(this.gamesForm.game_date)
             fetch('api/report/listFutureGames.php', {
                 method:'POST',
-                body: JSON.stringify(this.current),
+                body: JSON.stringify(this.gamesForm),
                 headers: {
                   "Content-Type": "application/json; charset=utf-8"
                 }
@@ -25,22 +27,32 @@ const reportsApp = {
               .then( json => {
                 console.log("Returned from post:", json);
                 // TODO: test a result was returned!
-                this.referees = json;
+                this.games = json;
                 
               
               })
               .catch( err => {
                 alert("Something went wrong.");
               });
+          },
+          fetchRefereeData() {
+            fetch('/api/referee/')
+            .then( response => response.json() )
+              .then( (responseJson) => {
+                  console.log(responseJson);
+                  this.referees = responseJson;
+              })
+              .catch( (err) => {
+                  console.error(err);
+              })
           },
           listGamesDateRange(evt){
-           
-            
-            // alert("Posting!");
-    
-            fetch('api/report/listGamesDateRange.php', {
+
+            alert(this.gameReportsForm.referee_name)
+            alert(this.gameReportsForm.start_date)
+             fetch('api/report/listGamesDateRange.php', {
                 method:'POST',
-                body: JSON.stringify(this.reportsRefereeForm),
+                body: JSON.stringify(this.gameReportsForm),
                 headers: {
                   "Content-Type": "application/json; charset=utf-8"
                 }
@@ -49,16 +61,19 @@ const reportsApp = {
               .then( json => {
                 console.log("Returned from post:", json);
                 // TODO: test a result was returned!
-                this.referees = json;
+                this.games = json;
                 
               
               })
               .catch( err => {
                 alert("Something went wrong.");
               });
-          },
+          }, 
 
     },
+    created() {
+        this.fetchRefereeData(); 
+    }
    
   
   }

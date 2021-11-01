@@ -10,9 +10,9 @@ $vars = [];
 
 // or is this if(isset($_GET['referee']))????
 if (isset($_GET['referee'])) {
-  $sql = 'SELECT * FROM referee WHERE referee_id = ?';
+  $sql = 'SELECT * FROM referee';
 
-  $vars = [ $_GET['referee'] ];
+  
 }
 
 $stmt = $db->prepare($sql);

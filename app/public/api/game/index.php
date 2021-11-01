@@ -8,13 +8,6 @@ $db = DbConnection::getConnection();
 $sql = 'SELECT * FROM game';
 $vars = [];
 
-// or is this if(isset($_GET['referee']))????
-if (isset($_GET['game'])) {
-  $sql = 'SELECT * FROM game WHERE game_id = ?';
-
-  $vars = [ $_GET['game'] ];
-}
-
 $stmt = $db->prepare($sql);
 $stmt->execute($vars);
 

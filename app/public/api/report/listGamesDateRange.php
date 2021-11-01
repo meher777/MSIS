@@ -32,23 +32,22 @@ $stmt = $db->prepare(
                 FROM game g, referee r, assignment a 
                 WHERE r.referee_id = a.referee_id AND 
                       g.game_id = a.game_id AND 
-                      g.game_date > ? and g.game_date < ?  and r.referee_id = ?'
+                      g.game_date > ? and g.game_date < ?  and r.referee_name = ?'
 
     );
 
 $stmt->execute([
-  $_POST['game_date'],
-  $_POST['game_date'],
-  $_POST['referee_id']
+  $_POST['start_date'],
+  $_POST['end_date'],
+  $_POST['referee_name']
  ]);
 
 
-// Get auto-generated PK from DB
-// https://www.php.net/manual/en/pdo.lastinsertid.php
-// $pk = $db->lastInsertId();  
+ $games = $stmt->fetchAll();
 
-// Step 4: Output
-// Here, instead of giving output, I'm redirecting to the SELECT API,
-// just in case the data changed by entering it
-header('HTTP/1.1 303 See Other');
-header('Location: ../books/');
+ // Step 3: Convert to JSON
+ $json = json_encode($games, JSON_PRETTY_PRINT);
+ 
+ // Step 4: Output
+ header('Content-Type: application/json');
+ echo $json;

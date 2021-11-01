@@ -8,12 +8,13 @@ const gameApp = {
   },
   computed: {},
   methods: {
-      fetchGameData(g) {
+      fetchGameData() {
         fetch('/api/game/index.php')
         .then( response => response.json() )
           .then( (responseJson) => {
               console.log(responseJson);
               this.games = responseJson;
+              console.log(this.games)
           })
           .catch( (err) => {
               console.error(err);
