@@ -80,7 +80,7 @@ const gameApp = {
             this.handleResetEdit = {};
           })
           .catch( err => {
-            alert("Something went wrong.");
+            alert("Oops, we have an error. Can you try again with correct values.");
           });
       },
       postDeleteGame(o) {  
@@ -105,7 +105,9 @@ const gameApp = {
             
             // reset the form
             this.handleResetEdit();
-          });
+          }).catch( err => {
+            alert("Oops, we have an error. Can you try again with correct values.");
+          });;
       },
       handleEditGame(game) {
         this.selectedGame = game;

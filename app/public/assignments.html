@@ -1,40 +1,5 @@
 <!DOCTYPE html>
 <html>
-<<<<<<< HEAD
-  <head>
-    <title>soccer</title>
-    <link rel="stylesheet" href="css/index.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
-     
-    <script src="https://unpkg.com/vue@next"></script> 
-  </head>
-
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#">Case Project</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="index.html">Home</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="games.html">Games</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="listGamesDateRange.html">View Games by Referee</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="listFutureGames.html">View Future Games</a>
-          </li>
-        </ul>
-      
-      </div>
-    </div>
-  </nav>
-=======
 <title>W3.CSS Template</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -43,12 +8,12 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-<script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
 <style>
-body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
+body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif; color: whitesmoke}
+.table {color: white;}
 .w3-row-padding img {margin-bottom: 12px}
 /* Set the width of the sidebar to 120px */
-.w3-sidebar {width: 150px;background: #222;}
+.w3-sidebar {width: 120px;background: #222;}
 /* Add a left margin to the "page content" that matches the width of the sidebar (120px) */
 #main {margin-left: 200px}
 /* Remove margins from "page content" on small screens */
@@ -65,7 +30,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
     <p>HOME</p>
   </a>
   <a href="games.html" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
-    <i class="far fa-futbol" style='font-size:24px'></i>
+    <i class="fas fa-futbol" style='font-size:24px'></i>
     <p>Games</p>
   </a>
   <a href="referees.html" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
@@ -73,15 +38,14 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
     <p>Referees</p>
   </a>
   <a href="assignments.html" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
-    <i class="fas fa-edit" style='font-size:24px'></i>
+    <i class="glyphicon glyphicon-list-alt" style='font-size:24px'></i>
     <p>Assignments</p>
   </a>
   <a href="reports.html" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
-    <i class="fas fa-clipboard" style='font-size:24px'></i>
+    <i class="glyphicon glyphicon-th-list" style='font-size:24px'></i>
     <p>Reports</p>
   </a>
 </nav>
->>>>>>> d6d7608031e0f3bd35bddc16af419fdae3d2ee9a
 
 
 
@@ -92,45 +56,76 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
   <!-- About Section -->
   <div class="w3-content w3-justify w3-text-grey w3-padding-64" id="main">
     
-    <div id="reportsTable" class="container">
-      <div class="row align-items-start">    
+    <div id="assignmentTable" class="container">
+      <div class="row align-items-start">
+
         <div  class="col col-8">
-
-          <form v-on:submit.prevent="listFutureGames"> 
-            <input type="date" v-model="gamesForm.game_date">  
-            <button type="submit" class="btn btn-primary btn-sm">Search Games</button>
-            
-          </form>
-
-
-          <h1>View All Future Games with "unassigned" Refrees -  </h1>
+          <h1>Assignments</h1>
           <table class="table">
             <thead>
               <tr>
-                <th>Referee Status</th>
+                <th>Assignment Id</th>
                 <th>Game Field</th>
                 <th>Game Date</th>
                 <th>Start Time</th>
                 <th>End Time</th>
-                <th>Referee Name</th>               
+                <th>Referee Name</th>
 
               </tr>
             </thead>
               <tbody>
                   <tr v-for="game in games">
-                      <td>{{ game.referee_status }}</td>                                  
+                      <td>{{ game.assignment_id }}</td>
                       <td>{{ game.game_field }}</td>
                       <td>{{ game.game_date }}</td>
                       <td>{{ game.start_time }}</td>
-                      <td>{{ game.end_time }}</td>
-                      <td> {{ game.referee_name }}</td>                     
+                      <td>{{ game.end_time}}</td>
+                      <td>{{ game.referee_name}}</td>
                       
+                      <td>
+                        <button type="button" v-on:click="handleEditAssignment(game)" class="btn btn-outline-secondary btn-sm">Edit</button>
+                        <button type="button" v-on:click="postDeleteAssignment(game)" class="btn btn-outline-secondary btn-sm">Delete</button>
+                        
+                      </td>
                   </tr>
               </tbody>
           </table>
+
+          <h3>{{ selectedAssignment === null ? "Add " : "Edit " }} Assignment</h3>
+          
+          <form v-on:submit.prevent="postAssignment">
+            <label for="assignment_game">Choose a Game:</label>
+            <select v-model ="assignmentForm.game_id">
+              <option> Select</option>
+              <option v-for = "g in games" value = "g.game_id">{{g.game_field}}, {{g.start_time}}</option>
+            </select> 
+            <br> 
+            <label for="assignment_referee">Choose a referee:</label>
+            <select v-model ="assignmentForm.referee_id">
+              <option> Select</option>
+              <option v-for = "r in referees" value = "r.referee_id">{{r.referee_name}}</option>
+            </select>
+            <br> 
+            <label for="assignment_refereeStatus">Choose a referee:</label>
+            <select v-model ="assignmentForm.referee_status">
+              <option> Select</option>
+              <option> unassigned</option>
+              <option> assigned</option>
+              <option> tentative</option>
+              <option> accepted</option>
+            </select> 
+              <br>
+              
+            <button type="submit" class="btn btn-primary">{{ selectedAssignment === null ? "Add " : "Edit " }} Assignment</button>
+            <button type="button" class="btn btn-warning" v-if="selectedAssignment" v-on:click="handleResetEdit">Cancel Edit</button>                 
+         </form>
+        
         </div>
       </div>
     </div>
+    
+    <!-- End About Section -->
+  </div>
   
   
 
@@ -145,6 +140,6 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
  <script src="https://unpkg.com/dayjs@1.8.21/dayjs.min.js"></script>
  
- <script src="js/reports.js"></script>
+ <script src="js/assignment.js"></script>
 </body>
 </html>

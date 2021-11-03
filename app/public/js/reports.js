@@ -39,9 +39,9 @@ const reportsApp = {
                   console.log(responseJson);
                   this.referees = responseJson;
               })
-              .catch( (err) => {
-                  console.error(err);
-              })
+              .catch( err => {
+                alert("Oops, we have an error. Can you try again with correct values.");
+              });
           },
           listGamesDateRange(evt){
 
@@ -63,7 +63,7 @@ const reportsApp = {
               
               })
               .catch( err => {
-                alert("Something went wrong.");
+                alert("Oops, we have an error. Can you try again with correct values.");
               });
           }, 
 
