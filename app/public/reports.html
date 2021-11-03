@@ -55,46 +55,9 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
   <!-- About Section -->
   <div class="w3-content w3-justify w3-text-grey w3-padding-64" id="main">
     
-    <div id="reportsTable" class="container">
-      <div class="row align-items-start">    
-        <div  class="col col-8">
-
-          <form v-on:submit.prevent="listFutureGames"> 
-            <input type="date" v-model="gamesForm.game_date">  
-            <button type="submit" class="btn btn-primary btn-sm">Search Games</button>
-            
-          </form>
-
-
-          <h1>View All Future Games with "unassigned" Refrees -  </h1>
-          <table class="table">
-            <thead>
-              <tr>
-                <th>Referee Status</th>
-                <th>Game Field</th>
-                <th>Game Date</th>
-                <th>Start Time</th>
-                <th>End Time</th>
-                <th>Referee Name</th>               
-
-              </tr>
-            </thead>
-              <tbody>
-                  <tr v-for="game in games">
-                      <td>{{ game.referee_status }}</td>                                  
-                      <td>{{ game.game_field }}</td>
-                      <td>{{ game.game_date }}</td>
-                      <td>{{ game.start_time }}</td>
-                      <td>{{ game.end_time }}</td>
-                      <td> {{ game.referee_name }}</td>                     
-                      
-                  </tr>
-              </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  
+    <a href="listFutureGames.html" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">LIST ALL FUTURE GAMES WITH UNASSIGNED REFEREE</a> 
+    <br> <br>
+    <a href="listGamesDateRange.html" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">LIST GAMES BY REFEREE IN A DATE RANGE</a>  
   
 
 

@@ -14,6 +14,7 @@ const RefereeApp = {
           .then( (responseJson) => {
               console.log(responseJson);
               this.referees = responseJson;
+              console.log(this.referees)
           })
           .catch( (err) => {
               console.error(err);
@@ -45,7 +46,9 @@ const RefereeApp = {
             
             // reset the form
             this.refereeForm = {};
-          });
+          }).catch( err => {
+            alert("Oops, we have an error. Can you try again with correct values.");
+          });;
       },
       postReferee(evt){
 
@@ -79,7 +82,7 @@ const RefereeApp = {
             this.handleResetEdit = {};
           })
           .catch( err => {
-            alert("Something went wrong.");
+            alert("Oops, we have an error. Can you try again with correct values.");
           });
       },
      /* postDeleteReferee(o) {  

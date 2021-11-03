@@ -46,11 +46,15 @@ const assignmentApp = {
               this.handleResetEdit();
             })
             .catch( err => {
-              alert("Something went wrong.");
+              alert("Oops, we have an error. Can you try again with correct values.");
             });
         },
 
         postEditAssignment(evt){
+          console.log(this.assignmentForm.game_id);
+          alert(this.assignmentForm.game_id);
+          alert(this.assignmentForm.referee_id);
+          alert(this.assignment_refereeStatus);
           fetch('api/assignments/update.php', {
               method:'POST',
               body: JSON.stringify(this.assignmentForm),
@@ -66,7 +70,7 @@ const assignmentApp = {
               this.handleResetEdit();
             })
             .catch( err => {
-              alert("Something went wrong.");
+              alert("Oops, we have an error. Can you try again with correct values.");
             });
         },
         postDeleteAssignment(g) {  
@@ -83,13 +87,16 @@ const assignmentApp = {
             .then( response => response.json() )
             .then( json => {
               console.log("Returned from post:", json);
+              this.fetchGameAssignmentData();
 
-           });
+           }).catch( err => {
+            alert("Oops, we have an error. Can you try again with correct values.");
+          });;
         },
-        /*handleEditGame(game) {
+        handleEditAssignment(game) {
           this.selectedAssignment = game;
           this.assignmentForm = Object.assign({}, this.selectedAssignment);
-        }, */
+        }, 
         handleResetEdit() {
             this.selectedAssignment = null;
             this.assignmentForm = {};
