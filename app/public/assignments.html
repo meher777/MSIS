@@ -102,13 +102,13 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif; color: whitesmok
             <label for="assignment_game">Choose a Game:</label>
             <select v-model ="assignmentForm.game_id">
               <option> Select</option>
-              <option v-for = "g in games" value = "g.game_id">{{g.game_field}}, {{g.start_time}}</option>
+              <option v-for = "g in games" value = "g.game_id">{{g.game_id}},{{g.game_field}}, {{g.start_time}}</option>
             </select> 
             <br> 
             <label for="assignment_referee">Choose a referee:</label>
             <select v-model ="assignmentForm.referee_id">
               <option> Select</option>
-              <option v-for = "r in referees" :value = "r.referee_id">{{r.referee_name}}</option>
+              <option v-for = "r in referees" value = "r.referee_id">{{r.referee_id}} - {{r.referee_name}}</option>
             </select>
             <br> 
             <label for="assignment_refereeStatus">Choose a referee:</label>

@@ -52,7 +52,7 @@ const assignmentApp = {
 
         postEditAssignment(evt){
           console.log(this.assignmentForm.game_id);
-          alert(this.assignmentForm.game_id);
+          alert(this.assignmentForm.game_id[0]);
           alert(this.assignmentForm.referee_id);
           alert(this.assignment_refereeStatus);
           fetch('api/assignments/update.php', {
