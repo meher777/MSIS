@@ -17,6 +17,7 @@
 </head>
 <style>
 body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
+.table {color: white;}
 .w3-row-padding img {margin-bottom: 12px}
 /* Set the width of the sidebar to 120px */
 .w3-sidebar {width: 150px;background: #222;}
@@ -93,13 +94,14 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
                       <td>{{ game.game_date }}</td>
                       <td>{{ game.start_time }}</td>
                       <td>{{ game.end_time }}</td>
-                      <td> {{ game.referee_name }}</td>                     
+                      <td>{{ game.referee_name }}</td>                     
                       
                   </tr>
               </tbody>
           </table>
         </div>
       </div>
+      <p> <a href = "api/report/listFutureGames.php?format=csv" download>Download as CSV</a></p>
     </div>
   
   

@@ -4,7 +4,6 @@ const assignmentApp = {
         games: [],
         referees : [],
         gamesData : [],
-        
         assignmentForm :{},
         selectedAssignment: null
       }
@@ -23,8 +22,7 @@ const assignmentApp = {
                 console.error(err);
             })
         },
-        postAssignment(evt){
-  
+        postAssignment(evt){  
           if(this.selectedAssignment){
             this.postEditAssignment(evt);
           }
@@ -32,7 +30,10 @@ const assignmentApp = {
             this.postNewAssignment(evt);
           }
         },
-        postNewAssignment(evt) {             
+        postNewAssignment(evt) { 
+          alert(this.assignmentForm.game_id);
+          alert(this.assignmentForm.referee_id);
+          alert(this.assignmentForm.referee_status);            
           fetch('api/assignments/create.php', {
               method:'POST',
               body: JSON.stringify(this.assignmentForm),
@@ -40,21 +41,21 @@ const assignmentApp = {
                 "Content-Type": "application/json; charset=utf-8"
               }
             })
-            .then( response => response.json() )
+            
             .then( json => {
               console.log("Returned from post:", json);
-              this.handleResetEdit();
+              this.fetchGameAssignmentData();
+              
             })
             .catch( err => {
               alert("Oops, we have an error. Can you try again with correct values.");
+              this.fetchGameAssignmentData();
             });
         },
 
         postEditAssignment(evt){
-          console.log(this.assignmentForm.game_id);
-          alert(this.assignmentForm.game_id[0]);
-          alert(this.assignmentForm.referee_id);
-          alert(this.assignment_refereeStatus);
+          
+
           fetch('api/assignments/update.php', {
               method:'POST',
               body: JSON.stringify(this.assignmentForm),
@@ -62,10 +63,9 @@ const assignmentApp = {
                 "Content-Type": "application/json; charset=utf-8"
               }
             })
-            .then( response => response.json() )
             .then( json => {
               console.log("Returned from post:", json);
-                       
+              this.fetchGameAssignmentData();       
               // reset the form
               this.handleResetEdit();
             })
@@ -93,16 +93,19 @@ const assignmentApp = {
             alert("Oops, we have an error. Can you try again with correct values.");
           });;
         },
+
         handleEditAssignment(game) {
           this.selectedAssignment = game;
           this.assignmentForm = Object.assign({}, this.selectedAssignment);
-        }, 
+        },
+
         handleResetEdit() {
             this.selectedAssignment = null;
             this.assignmentForm = {};
         },
+
         fetchRefereeData() {
-            fetch('/api/referee/')
+            fetch('/api/referee/index.php')
             .then( response => response.json() )
               .then( (responseJson) => {
                   console.log(responseJson);
@@ -112,13 +115,14 @@ const assignmentApp = {
                   console.error(err);
               })
           },
-          fetchGameData() {
+
+        fetchGameData() {
             fetch('/api/game/index.php')
             .then( response => response.json())
               .then( (responseJson) => {
                   console.log(responseJson);
                   this.gamesData = responseJson;
-                  console.log(this.games)
+                  console.log(this.gamesData)
               })
               .catch( (err) => {
                   console.error(err);

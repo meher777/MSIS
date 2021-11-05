@@ -44,7 +44,7 @@ const reportsApp = {
               });
           },
           listGamesDateRange(evt){
-
+            
             alert(this.gameReportsForm.referee_name)
             alert(this.gameReportsForm.start_date)
              fetch('api/report/listGamesDateRange.php', {

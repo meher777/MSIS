@@ -34,13 +34,16 @@ $stmt = $db->prepare(
   'UPDATE  assignment set 
   game_id = ?, 
   referee_id = ?,
-  referee_status = ?'
+  referee_status = ?
+  where assignment_id = ?'
 );
+
 
 $stmt->execute([
   $_POST['game_id'],
   $_POST['referee_id'],
-  $_POST['referee_status']
+  $_POST['referee_status'],
+  $_POST['assignment_id']
 ]);
 
 // Get auto-generated PK from DB
@@ -50,6 +53,5 @@ $stmt->execute([
 // Step 4: Output
 // Here, instead of giving output, I'm redirecting to the SELECT API,
 // just in case the data changed by entering it
-header('HTTP/1.1 303 See Other');
-header('Location: ../assignments/?assignments=' . $_POST['assignment_id']);
+
 // dependent on the index.php if(isset(GET)) and select statement

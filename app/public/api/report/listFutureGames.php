@@ -43,14 +43,28 @@ $stmt->execute([
  ]);
 
  $games = $stmt->fetchAll();
+ if (isset($_GET['format']) && $_GET['format']=='csv') {
+    header('Content-Type: text/csv');
+    echo "Referee Status,Game Field,Game Date,Start Time, End Time\r\n";
+  
+    foreach($games as $g) {
+      echo "\"".$g['referee_status'] . "\","
+          .$g['game_field'] . ","
+          .$g['game_date'] . ","
+          .$g['start_time'] . ","
+          .$g['end_time']."\r\n";
+    }
+  
+  } 
 
  // Step 3: Convert to JSON
- $json = json_encode($games, JSON_PRETTY_PRINT);
+ else {
+     $json = json_encode($games, JSON_PRETTY_PRINT);
  
  // Step 4: Output
  header('Content-Type: application/json');
  echo $json;
- 
+ }
 // Get auto-generated PK from DB
 // https://www.php.net/manual/en/pdo.lastinsertid.php
 // $pk = $db->lastInsertId();  

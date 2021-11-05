@@ -44,10 +44,25 @@ $stmt->execute([
 
 
  $games = $stmt->fetchAll();
+ if (isset($_GET['format']) && $_GET['format']=='csv') {
+    header('Content-Type: text/csv');
+    echo "Game Field,Game Date,Start Time, End Time, Referee Name\r\n";
+  
+    foreach($games as $g) {
+      echo "\"".$g['game_field']. "\","
+                .$g['game_date'] . ","
+                .$g['start_time'] . ","
+                .$g['end_time'] . ","
+                .$g['referee_name']."\r\n";
+    }
+  
+  } 
+  else {
 
+  
  // Step 3: Convert to JSON
  $json = json_encode($games, JSON_PRETTY_PRINT);
  
  // Step 4: Output
  header('Content-Type: application/json');
- echo $json;
+ echo $json;}
