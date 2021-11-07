@@ -105,9 +105,7 @@ const gameApp = {
             
             // reset the form
             this.handleResetEdit();
-          }).catch( err => {
-            alert("Oops, we cant delete this game. Please delete the assignment for this game.");
-          });;
+          });
       },
       handleEditGame(game) {
         this.selectedGame = game;

@@ -48,7 +48,7 @@ const RefereeApp = {
             this.refereeForm = {};
           }).catch( err => {
             alert("Oops, we have an error. Can you try again with correct values.");
-          });;
+          });
       },
       postReferee(evt){
 
