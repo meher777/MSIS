@@ -58,8 +58,8 @@ const gameApp = {
         }
       },
       postEditGame(evt){
-        this.gameForm.id = this.selectedGame.id;
-        this.gameForm.id = this.selectedGame.id;        
+        this.gameForm.game_id = this.selectedGame.game_id;
+        //this.gameForm.id = this.selectedGame.id;        
         console.log("Editing:", this.gameForm);
         // alert("Posting!");
 

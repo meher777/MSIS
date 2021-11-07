@@ -92,21 +92,22 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif; color: whitesmok
           <form v-on:submit.prevent="postGame">
             <div class="mb-3">
               <label for="date" class="form-label">Date</label>
-              <input type="date" v-model="gameForm.name"
+              <input type="date" v-model="gameForm.game_date"
                class="form-control" id="date" > 
             </div>
             <div class="mb-3">
               <label for="field" class="form-label">Field</label>
-              <input type="text" v-model="gameForm.age" class="form-control" id="age" >
+              <input type="text" v-model="gameForm.game_field" class="form-control" id="age" >
             </div>
             <div class="mb-3">
               <label for="startTime" class="form-label">Start Time</label>
-              <input type="time" v-model="gameForm.grade" class="form-control" id="startTime">
+              <input type="time" v-model="gameForm.start_time" class="form-control" id="startTime">
             </div>
             <div class="mb-3">
               <label for="endTime" class="form-label">End Time</label>
-              <input type="time" v-model="gameForm.rating" class="form-control" id="endTime">
+              <input type="time" v-model="gameForm.end_time" class="form-control" id="endTime">
             </div>
+            
             <button type="submit" class="btn btn-primary">{{ selectedGame === null ? "Add " : "Edit " }} Game</button>
             <button type="button" class="btn btn-outline-secondary" 
                v-if="selectedGame"
