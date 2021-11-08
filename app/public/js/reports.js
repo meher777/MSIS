@@ -4,8 +4,10 @@ const reportsApp = {
         games: [],
         referees : [],
         gamesForm: {},
+        gamesData : [],
         gameReportsForm : {},
-            
+        gameRefereeForm : {},
+        refereeGame : []           
       
       }
     },
@@ -50,6 +52,18 @@ const reportsApp = {
         link.click(); // This will download the data file named "my_data.csv"
         
         },
+        fetchGameData() {
+          fetch('/api/game/index.php')
+          .then( response => response.json() )
+            .then( (responseJson) => {
+                console.log(responseJson);
+                this.gamesData = responseJson;
+                console.log(this.games)
+            })
+            .catch( (err) => {
+                console.error(err);
+            })
+        },
         listFutureGames(evt){
 
             fetch('api/report/listFutureGames.php', {
@@ -82,6 +96,29 @@ const reportsApp = {
                 alert("Oops, we have an error. Can you try again with correct values.");
               });
           },
+          refereesByGame(evt){
+            
+            //alert(this.gameReportsForm.referee_name)
+            //alert(this.gameReportsForm.start_date)
+             fetch('api/report/refereesByGame.php', {
+                method:'POST',
+                body: JSON.stringify(this.gameRefereeForm),
+                headers: {
+                  "Content-Type": "application/json; charset=utf-8"
+                }
+              })
+              .then( response => response.json() )
+              .then( json => {
+                console.log("Returned from post:", json);
+                // TODO: test a result was returned!
+                this.refereeGame = json;
+                
+              
+              })
+              .catch( err => {
+                alert("Oops, we have an error. Can you try again with correct values.");
+              });
+          }, 
           listGamesDateRange(evt){
             
             alert(this.gameReportsForm.referee_name)
@@ -109,6 +146,7 @@ const reportsApp = {
     },
     created() {
         this.fetchRefereeData(); 
+        this.fetchGameData();
     }
    
   
