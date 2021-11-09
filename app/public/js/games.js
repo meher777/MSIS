@@ -77,6 +77,7 @@ const gameApp = {
             this.games = json;
             
             // reset the form
+            this.handleResetEdit();
             this.handleResetEdit = {};
           })
           .catch( err => {

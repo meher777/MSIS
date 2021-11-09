@@ -31,9 +31,9 @@ const assignmentApp = {
           }
         },
         postNewAssignment(evt) { 
-          alert(this.assignmentForm.game_id);
-          alert(this.assignmentForm.referee_id);
-          alert(this.assignmentForm.referee_status);            
+          //alert(this.assignmentForm.game_id);
+          //alert(this.assignmentForm.referee_id);
+          //alert(this.assignmentForm.referee_status);            
           fetch('api/assignments/create.php', {
               method:'POST',
               body: JSON.stringify(this.assignmentForm),
