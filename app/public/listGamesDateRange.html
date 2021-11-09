@@ -62,15 +62,18 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
         <div  class="col col-8" >
           <h1>Games by Referee</h1>          
           <form v-on:submit.prevent="listGamesDateRange">
-                <label for="referees">Choose a referee:</label>
+                <label for="referees">Choose a referee:</label>  &nbsp; &nbsp;
                 <select v-model ="gameReportsForm.referee_name">
                   <option> Select</option>
                   <option v-for = "r in referees" >{{r.referee_name}}</option>
-                </select>       
-                <label for="startDate">Start Date:</label>
+                </select>  
+                <br>     
+                <label for="startDate">Start Date:</label>  &nbsp; &nbsp;
                   <input type="date"  v-model ="gameReportsForm.start_date">
-                <label for="endDate">End Date:</label>
-                 <input type="date"  v-model = "gameReportsForm.end_date">   
+                  <br>
+                <label for="endDate">End Date:</label>  &nbsp; &nbsp;
+                 <input type="date"  v-model = "gameReportsForm.end_date">    &nbsp; &nbsp;
+                 <br>
                 <button type="submit" class="btn btn-primary btn-sm">Search Games</button>                   
           </form>
           

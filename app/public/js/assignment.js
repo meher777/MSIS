@@ -45,6 +45,7 @@ const assignmentApp = {
             .then( json => {
               console.log("Returned from post:", json);
               this.fetchGameAssignmentData();
+              this.handleResetEdit();
               
             })
             .catch( err => {
